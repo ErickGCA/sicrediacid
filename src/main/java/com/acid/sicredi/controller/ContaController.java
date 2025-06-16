@@ -36,10 +36,17 @@ public class ContaController {
         Conta contaSalva = contaRepository.save(conta);
         return ResponseEntity.ok(contaSalva);
     }
-
-    @GetMapping
-    public ResponseEntity<List<Conta>> listarContas(){
-        return ResponseEntity.ok(contaRepository.findAll());
+    //Get em contas com id http:/localhost:8080/contas/id
+    @GetMapping("/{id}")
+    public ResponseEntity<Conta> buscarContaPorId(@PathVariable Long id) {
+        return contaRepository.findById(id)
+                .map(conta -> ResponseEntity.ok(conta))
+                .orElse(ResponseEntity.notFound().build());
     }
-
+    //Get em todas as contas
+    @GetMapping
+    public ResponseEntity<List<Conta>> buscarTodasAsContas() {
+        List<Conta> contas = contaRepository.findAll();
+        return ResponseEntity.ok(contas);
+    }
 }

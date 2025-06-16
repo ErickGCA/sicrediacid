@@ -19,7 +19,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(HttpMethod.POST, "/contas", "/contas/transferir").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/contas").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/contas/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
