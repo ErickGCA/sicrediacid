@@ -32,6 +32,10 @@ public class TransferenciaService {
         }
 
         contaOrigem.setSaldo(contaOrigem.getSaldo().subtract(valor));
+        if(contaDestino.getSaldo().compareTo(valor) < 0) {
+            throw new RuntimeException("Saldo insuficiente!");
+        }
         contaDestino.setSaldo(contaDestino.getSaldo().add(valor));
     }
 }
+
