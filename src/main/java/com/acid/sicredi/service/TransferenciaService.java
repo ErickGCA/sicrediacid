@@ -5,8 +5,11 @@ import com.acid.sicredi.repository.ContaRepository;
 
 import com.acid.sicredi.repository.ContaRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+
+@Service
 
 public class TransferenciaService {
 
@@ -17,9 +20,8 @@ public class TransferenciaService {
 
     }
 
-    @Transactional // A anotação mais importante para o seu projeto ACID
+    @Transactional
     public void transferir(Long idContaOrigem, Long idContaDestino, BigDecimal valor) {
-        // A lógica que já discutimos: busca as contas, valida o saldo e efetua a transferência
         Conta contaOrigem = contaRepository.findById(idContaOrigem)
                 .orElseThrow(() -> new RuntimeException("Conta de origem não encontrada!"));
         Conta contaDestino = contaRepository.findById(idContaDestino)
